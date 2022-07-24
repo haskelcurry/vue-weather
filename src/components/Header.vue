@@ -8,7 +8,7 @@ export default {
 
 <template>
   <header>
-    <h2>{{ title }}</h2>
+    <h2>{{ title }}111</h2>
   </header>
 </template>
 
