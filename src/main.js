@@ -8,8 +8,7 @@ import './styles/main.css';
 
 const routes = [
   { path: '/', component: Weather },
-  { path: '/about', component: About },
-  { path: '/setting', component: Settings },
+  { path: '/about', component: About }
 ];
 
 const router = createRouter({

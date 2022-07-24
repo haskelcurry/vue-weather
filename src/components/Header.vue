@@ -11,3 +11,6 @@ export default {
     <h2>{{ title }}</h2>
   </header>
 </template>
+
+<style>
+</style>
