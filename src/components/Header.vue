@@ -1,9 +1,10 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <script>
 export default {
   props: {
     title: String
   }
-}
+};
 </script>
 
 <template>
@@ -12,5 +13,4 @@ export default {
   </header>
 </template>
 
-<style>
-</style>
+<style></style>

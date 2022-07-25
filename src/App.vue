@@ -1,6 +1,5 @@
 <script>
-export default {
-}
+export default {};
 </script>
 
 <template>
@@ -12,5 +11,7 @@ export default {
 </template>
 
 <style scoped>
-  .nav a {margin-right: 12px;}
+.nav a {
+  margin-right: 12px;
+}
 </style>
