@@ -18,36 +18,51 @@ export default {
     getInitials() {
       for (let i = 0; i < this.contributorsList.length; i++) {
         const arrayNew = this.contributorsList[i].contributorsNames.split(' ');
-        const aaa = arrayNew.shift().charAt(0) + arrayNew.pop().charAt(0);
-        return (this.contributorsList[i].contributorsInitials = aaa.toUpperCase());
+        const firstCharOfName = arrayNew.shift().charAt(0) + arrayNew.pop().charAt(0);
+        this.contributorsList[i].contributorsInitials = firstCharOfName.toUpperCase();
       }
     }
+  },
+  beforeMount() {
+    this.getInitials();
   }
 };
 </script>
 
 <template>
-  <button @click="getInitials">Get</button>
   <p>About</p>
   <p>This application was developed by a group of enthusiasts to try out the Vue.js capabilities</p>
 
-  <section>
+  <section class="about-contributors-section">
     <h2>Contributors</h2>
     <!-- eslint-disable-next-line vue/require-v-for-key -->
-    <ul v-for="initial in contributorsInitials" class="about-contributors-list">
+    <ul v-for="initial in contributorsList" class="about-contributors-list">
       <li class="about-contributors-item">
-        <div class="about-contributors-item-initials">{{ initial.contributorsInitials }}</div>
-        <span>{{ initial.contributorsNames }}</span>
+        <div class="about-contributors-item-container">
+          <span class="about-contributors-item-initials">{{ initial.contributorsInitials }}</span>
+          <span class="about-contributors-item-name">{{ initial.contributorsNames }}</span>
+        </div>
       </li>
     </ul>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit, quos?</p>
   </section>
 </template>
 
 <style scoped>
+.about-contributors-list {
+  margin: 10px auto;
+}
+.about-contributors-item {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
 .about-contributors-item-initials {
   border: 1px solid #000;
   border-radius: 50%;
+  padding: 5px;
+}
+.about-contributors-item-name {
+  margin-left: 10px;
 }
 
 button {
