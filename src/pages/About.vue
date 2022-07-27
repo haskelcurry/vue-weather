@@ -3,79 +3,90 @@
 export default {
   data() {
     return {
-      //contributorsInitials: [],
-      contributorsList: [
-        {
-          contributorsNames: 'Markel Tuzinskiy'
-        },
-        {
-          contributorsNames: 'John Smith'
-        }
-      ]
+      contributorsList: []
     };
   },
   methods: {
-    getInitials() {
-      for (let i = 0; i < this.contributorsList.length; i++) {
-        const arrayNew = this.contributorsList[i].contributorsNames.split(' ');
-        const firstCharOfName = arrayNew.shift().charAt(0) + arrayNew.pop().charAt(0);
-        this.contributorsList[i].contributorsInitials = firstCharOfName.toUpperCase();
-      }
+    getContributors() {
+      const url = 'https://api.github.com/repos/jxw1102/Projet-merou/contributors';
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((result) => {
+          this.contributorsList.push(...result);
+          this.contributorsList = this.contributorsList.map((item) => ({
+            ...item,
+            // eslint-disable-next-line no-prototype-builtins
+            initials: item.login.slice(0, 2).toUpperCase()
+          }));
+          console.log(this.contributorsList);
+        })
+        .catch(() => {
+          this.error = `Error`;
+        });
     }
   },
   beforeMount() {
-    this.getInitials();
+    this.getContributors();
   }
 };
 </script>
 
 <template>
-  <p>About</p>
-  <p>This application was developed by a group of enthusiasts to try out the Vue.js capabilities</p>
-
-  <section class="about-contributors-section">
-    <h2>Contributors</h2>
-    <!-- eslint-disable-next-line vue/require-v-for-key -->
-    <ul v-for="initial in contributorsList" class="about-contributors-list">
-      <li class="about-contributors-item">
-        <div class="about-contributors-item-container">
-          <span class="about-contributors-item-initials">{{ initial.contributorsInitials }}</span>
-          <span class="about-contributors-item-name">{{ initial.contributorsNames }}</span>
-        </div>
-      </li>
-    </ul>
-  </section>
+  <main class="main-about-section">
+    <p>This application was developed by a group of enthusiasts to try out the Vue.js capabilities</p>
+    <section class="about-contributors-section">
+      <ul class="about-contributors-list">
+        <h2>Contributors</h2>
+        <!-- eslint-disable-next-line vue/require-v-for-key -->
+        <li v-for="item in contributorsList" class="about-contributors-item">
+          <img v-if="item.avatar_url !== ''" v-bind:src="item.avatar_url" class="about-contributors-item-avatar" />
+          <span v-else class="about-contributors-item-initials">{{ item.initials }}</span>
+          <span class="about-contributors-item-name">{{ item.login }}</span>
+        </li>
+      </ul>
+    </section>
+  </main>
 </template>
 
 <style scoped>
-.about-contributors-list {
-  margin: 10px auto;
+* {
+  color: #000;
+  background-color: #fff;
 }
-.about-contributors-item {
+
+ul, li {
+  list-style-type: none;
+}
+
+.about-contributors-item-avatar {
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.main-about-section {
+  max-width: 1280px;
+  padding: 50px;
+}
+.about-contributors-list {
   display: flex;
   flex-direction: column;
   margin: 20px;
 }
+
+.about-contributors-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 10px;
+  text-align: center;
+}
 .about-contributors-item-initials {
   border: 1px solid #000;
   border-radius: 50%;
-  padding: 5px;
+  padding: 10px;
 }
 .about-contributors-item-name {
-  margin-left: 10px;
-}
-
-button {
-  cursor: pointer;
-  border: none;
-  font-size: 14px;
-  font-weight: bold;
-  letter-spacing: 0.1em;
-  padding: 10px 15px;
-  margin-left: 15px;
-  border-radius: 5px;
-  color: white;
-  background: #ff1e42;
-  transition: background 0.3s ease-in-out;
+  display: inline-block;
 }
 </style>
