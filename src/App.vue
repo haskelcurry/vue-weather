@@ -7,6 +7,7 @@ export default {
   <p class="nav">
     <router-link to="/">Погода </router-link>
     <router-link to="/about">Про нас</router-link>
+    <router-link to="/subscribe">Subscribe</router-link>
   </p>
   <router-view></router-view>
 </template>
