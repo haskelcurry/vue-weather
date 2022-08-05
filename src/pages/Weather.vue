@@ -8,26 +8,56 @@ export default {
     return {
       searchText: '',
       results: [],
-      error: ''
+      error: '',
+      lat: '',
+      lon: '',
+      cities: []
     };
   },
   methods: {
     search() {
       const apiKey = `4d8fb5b93d4af21d66a2948710284366`;
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${this.searchText}&appid=${apiKey}&units=metric&lang=ua`;
+      let url = '';
+      if (this.searchText !== '') {
+        url = `https://api.openweathermap.org/data/2.5/weather?q=${this.searchText}&appid=${apiKey}&units=metric&lang=ua`;
+      } else {
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${apiKey}&units=metric&lang=ua`;
+      }
       fetch(url)
         .then((response) => response.json())
         .then((result) => {
           const iconCode = result.weather[0].icon;
           const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${iconCode}.svg`;
           result.icon = icon;
-          this.results.push(result);
+          const foundItem = this.results.findIndex(
+            (item) => item.coord.lat === result.coord.lat && item.coord.lon === result.coord.lon
+          );
+          if (foundItem === -1) {
+            this.results.push(result);
+            this.cities.push(result.name);
+          } else {
+            this.results[foundItem] = result;
+          }
           this.error = ``;
         })
         .catch(() => {
           this.error = `Такого міста не існує 😩`;
         });
+    },
+    getGPS() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this.showLocation);
+      } else {
+        this.error = 'GPS is not supported.';
+      }
+    },
+    showLocation(location) {
+      this.lat = location.coords.latitude;
+      this.lon = location.coords.longitude;
     }
+  },
+  mounted() {
+    this.getGPS();
   },
   // eslint-disable-next-line vue/no-reserved-component-names
   components: { Header, Footer }
@@ -35,7 +65,9 @@ export default {
 </script>
 
 <template>
-  <Header title="Погода в селі" />
+  <Header title="Погода в: " />
+  <!-- eslint-disable-next-line vue/require-v-for-key -->
+  <span>{{ cities.join(', ') }}</span>
   <section>
     <input type="text" placeholder="Назва села" autofocus v-model="searchText" />
     <button @click="search">Пошук</button>
@@ -54,6 +86,15 @@ export default {
 </template>
 
 <style scoped>
+span {
+  color: #f13d06;
+  font-size: 1.3em;
+}
+
+section {
+  margin-top: 20px;
+}
+
 button {
   cursor: pointer;
   border: none;
