@@ -28,7 +28,7 @@ export default {
         .then((result) => {
           const iconCode = result.weather[0].icon;
           const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${iconCode}.svg`;
-          const locationGoogleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${this.coords.latitude},${this.coords.longitude}`;
+          const locationGoogleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${result.coord.lat},${result.coord.lon}`;
           result.icon = icon;
           result.locationGoogleMapsUrl = locationGoogleMapsUrl;
           const foundItem = this.results.findIndex(
