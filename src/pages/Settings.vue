@@ -14,37 +14,49 @@ export default {
 </script>
 
 <template>
-<button @click="back" class="btn btn-primary">Назад</button>
+<p class="nav">
+  <a>Settings</a> <router-link to="/" class="header">   Back </router-link>
+</p>
   <input v-model="text" placeholder="Default Address">
   <p>{{ text }}</p>
   <form action= ''>
-  <legend>Units</legend><br>
-     <input name='recommended-by' value='Metric' type='radio'>Metric
+  <h1>Units</h1><br>
+     <input name='units' value='Metric' type='radio'>Metric
      <br/>
-     <input name='recommended-by' value='Standart' type='radio'>Standart
+     <input name='units' value='Standart' type='radio'>Standart
      <br/>
-     <input name='recommended-by' value='Imperial' type='radio'>Imperial
-   </form><br>
-   <div><br/>
-    <legend id="Language">Language</legend><br>
+     <input name='units' value='Imperial' type='radio'>Imperial
+  </form><br>
+    <div><br/>
+    <h2 id="Language">Language</h2><br>
     <select id='dropdown'>
     <br/>
       <option>UA</option>
       <option>EN</option>
       <option>DE</option>
     </select>
-  </div><br>
-  <br/>
-<button id="save" type="save">Save</button>
+    </div>
+<button @click="$router.back()">Save</button>
 </template>
 
-<style>
+<style scoped>
+p.nav {
+    border: 1px solid black;
+    margin: 0 0 0px 0;
+    padding: 10px 0 10px 10px;
+}
+h1 {
+    font-size: 16px;
+}
+h2 {
+    font-size: 16px;
+}
 button {
-  cursor: pointer;
-  border: none;
-  font-size: 14px;
-  font-weight: bold;
-  padding: 10px 15px;
-  margin-left: 100px;
+  background-color:grey;
+  margin: 10px;
+  font-size: 16px;
+}
+input {
+   margin: 5px; 
 }
 </style>
