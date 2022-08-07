@@ -9,19 +9,19 @@ export default {
       searchText: '',
       results: [],
       error: '',
-      lat: '',
-      lon: '',
+      coords: {},
       cities: []
     };
   },
   methods: {
-    search() {
+    async search() {
+      await this.getGPS();
       const apiKey = `4d8fb5b93d4af21d66a2948710284366`;
       let url = '';
       if (this.searchText !== '') {
         url = `https://api.openweathermap.org/data/2.5/weather?q=${this.searchText}&appid=${apiKey}&units=metric&lang=ua`;
       } else {
-        url = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&appid=${apiKey}&units=metric&lang=ua`;
+        url = `https://api.openweathermap.org/data/2.5/weather?lat=${this.coords.latitude}&lon=${this.coords.longitude}&appid=${apiKey}&units=metric&lang=ua`;
       }
       fetch(url)
         .then((response) => response.json())
@@ -44,20 +44,29 @@ export default {
           this.error = `Такого міста не існує 😩`;
         });
     },
-    getGPS() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this.showLocation);
-      } else {
-        this.error = 'GPS is not supported.';
-      }
-    },
-    showLocation(location) {
-      this.lat = location.coords.latitude;
-      this.lon = location.coords.longitude;
+    async getGPS() {
+      await new Promise((resolve, reject) => {
+        if (!navigator.geolocation) {
+          (err) => {
+            reject(err);
+            this.error = err.message;
+          };
+        }
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            resolve(position);
+            this.coords = position.coords;
+          },
+          (err) => {
+            reject(err);
+            this.error = err.message;
+          }
+        );
+      });
     }
   },
   mounted() {
-    this.getGPS();
+    this.search();
   },
   // eslint-disable-next-line vue/no-reserved-component-names
   components: { Header, Footer }
@@ -125,6 +134,10 @@ input {
 
 input::placeholder {
   color: #aaa;
+}
+
+.error {
+  padding: 5px;
 }
 
 .result {
