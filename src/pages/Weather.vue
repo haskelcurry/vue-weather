@@ -28,7 +28,9 @@ export default {
         .then((result) => {
           const iconCode = result.weather[0].icon;
           const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${iconCode}.svg`;
+          const locationGoogleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${this.coords.latitude},${this.coords.longitude}`;
           result.icon = icon;
+          result.locationGoogleMapsUrl = locationGoogleMapsUrl;
           const foundItem = this.results.findIndex(
             (item) => item.coord.lat === result.coord.lat && item.coord.lon === result.coord.lon
           );
@@ -75,7 +77,6 @@ export default {
 
 <template>
   <Header title="Погода в: " />
-  <!-- eslint-disable-next-line vue/require-v-for-key -->
   <span>{{ cities.join(', ') }}</span>
   <section>
     <input type="text" placeholder="Назва села" autofocus v-model="searchText" />
@@ -83,12 +84,13 @@ export default {
     <span class="error">{{ error }}</span>
   </section>
   <section class="results">
-    <!-- eslint-disable-next-line vue/require-v-for-key -->
     <div v-for="result in results" class="result">
+      <a :href="result.locationGoogleMapsUrl" target="_blank">{{ result.coord.lat + ',' + result.coord.lon }}</a>
       <div class="name">{{ result.name }}, {{ result.sys.country }}</div>
       <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
       <img :src="result.icon" />
       <div class="description">{{ result.weather[0].description }}</div>
+
     </div>
   </section>
   <Footer groupName="першою" />
