@@ -8,7 +8,7 @@ export default {
   },
   methods: {
     getContributors() {
-      const url = 'https://api.github.com/repos/jxw1102/Projet-merou/contributors';
+      const url = 'https://api.github.com/repos/mtuzinskiy/vue-weather/contributors';
 
       function getInitials(name) {
         return name

@@ -68,14 +68,12 @@ export default {
   mounted() {
     this.search();
   },
-  // eslint-disable-next-line vue/no-reserved-component-names
   components: { Header, Footer }
 };
 </script>
 
 <template>
   <Header title="Погода в: " />
-  <!-- eslint-disable-next-line vue/require-v-for-key -->
   <span>{{ cities.join(', ') }}</span>
   <section>
     <input type="text" placeholder="Назва села" autofocus v-model="searchText" />
@@ -83,7 +81,6 @@ export default {
     <span class="error">{{ error }}</span>
   </section>
   <section class="results">
-    <!-- eslint-disable-next-line vue/require-v-for-key -->
     <div v-for="result in results" class="result">
       <div class="name">{{ result.name }}, {{ result.sys.country }}</div>
       <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
