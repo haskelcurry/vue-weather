@@ -2,6 +2,7 @@
 <script>
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
+import GoogleMap from '../components/GoogleMap.vue';
 
 export default {
   data() {
@@ -70,7 +71,7 @@ export default {
   mounted() {
     this.search();
   },
-  components: { Header, Footer }
+  components: { Header, Footer, GoogleMap }
 };
 </script>
 
@@ -89,7 +90,9 @@ export default {
       <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
       <img :src="result.icon" />
       <div class="description">{{ result.weather[0].description }}</div>
-
+    </div>
+    <div id="#appMap">
+      <GoogleMap />
     </div>
   </section>
   <Footer groupName="першою" />
@@ -141,7 +144,13 @@ input::placeholder {
   padding: 5px;
 }
 
+.results{
+  display: flex;
+  margin-left: 10px;
+}
 .result {
+  width: 500px;
+  max-width: 500px;
   background: white;
   color: black;
   border-radius: 20px;

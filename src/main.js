@@ -5,6 +5,7 @@ import About from './pages/About.vue';
 import Subscribe from './pages/Subscribe.vue';
 import Settings from './pages/Settings.vue';
 import App from './App.vue';
+import VueGoogleMaps from '@fawmi/vue-google-maps';
 
 import './styles/main.css';
 
@@ -23,3 +24,12 @@ const router = createRouter({
 const app = createApp(App);
 app.use(router);
 app.mount('#app');
+
+const googleMapApp = createApp(App);
+googleMapApp
+  .use(VueGoogleMaps, {
+    load: {
+      key: 'YOUR_API_KEY_COMES_HERE'
+    }
+  })
+  .mount('#appMap');
