@@ -71,6 +71,7 @@ export default {
   mounted() {
     this.search();
   },
+  // eslint-disable-next-line vue/no-reserved-component-names
   components: { Header, Footer, GoogleMap }
 };
 </script>
@@ -94,7 +95,6 @@ export default {
         <GoogleMap />
       </div>
     </div>
-
   </section>
   <Footer groupName="першою" />
 </template>
@@ -145,7 +145,7 @@ input::placeholder {
   padding: 5px;
 }
 
-.results{
+.results {
   display: flex;
   margin-left: 10px;
 }
