@@ -90,10 +90,11 @@ export default {
       <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
       <img :src="result.icon" />
       <div class="description">{{ result.weather[0].description }}</div>
+      <div id="#appMap">
+        <GoogleMap />
+      </div>
     </div>
-    <div id="#appMap">
-      <GoogleMap />
-    </div>
+
   </section>
   <Footer groupName="першою" />
 </template>
