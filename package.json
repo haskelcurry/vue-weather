@@ -15,8 +15,11 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "^0.9.79",
     "vue": "^3.2.37",
-    "vue-router": "^4.1.2"
+    "vue-router": "^4.1.2",
+    "vue2-google-maps": "^0.10.7",
+    "vue3-google-map": "^0.14.1"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
