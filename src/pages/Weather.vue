@@ -85,14 +85,16 @@ export default {
     <span class="error">{{ error }}</span>
   </section>
   <section class="results">
-    <div v-for="result in results" class="result">
-      <a :href="result.locationGoogleMapsUrl" target="_blank">{{ result.coord.lat + ',' + result.coord.lon }}</a>
-      <div class="name">{{ result.name }}, {{ result.sys.country }}</div>
-      <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
-      <img :src="result.icon" />
-      <div class="description">{{ result.weather[0].description }}</div>
-      <div id="#appMap">
-        <GoogleMap />
+    <div v-for="result in results" class="result-container">
+      <div class="result">
+        <a :href="result.locationGoogleMapsUrl" target="_blank">{{ result.coord.lat + ',' + result.coord.lon }}</a>
+        <div class="name">{{ result.name }}, {{ result.sys.country }}</div>
+        <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
+        <img :src="result.icon" />
+        <div class="description">{{ result.weather[0].description }}</div>
+      </div>
+      <div id="appMap">
+        <GoogleMap :lat="result.coord.lat" :lon="result.coord.lon" />
       </div>
     </div>
   </section>
@@ -148,16 +150,26 @@ input::placeholder {
 .results {
   display: flex;
   margin-left: 10px;
+  flex-wrap: wrap;
+  /* width: 1000px; */
+  max-width: 1000px;
 }
-.result {
-  width: 500px;
-  max-width: 500px;
+.result-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
   background: white;
   color: black;
   border-radius: 20px;
   padding: 12px;
   margin-top: 24px;
   filter: drop-shadow(0px 8px 5px black);
+}
+
+.result,
+#appMap {
+  width: 45%;
 }
 
 .result .name {

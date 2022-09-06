@@ -1,50 +1,40 @@
-<template>
-  <GMapMap :center="center" :zoom="10" map-type-id="terrain" style="width: 100vw; height: 20rem">
-    <GMapCluster :zoomOnClick="true">
-      <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" :draggable="true"
-        @click="center = m.position" />
-    </GMapCluster>
-  </GMapMap>
-</template>
-
 <script>
-export default {
-  data() {
-    return {
-      center: { lat: 51.093048, lng: 6.84212 },
-      markers: [
-        {
-          position: {
-            lat: 51.093048,
-            lng: 6.84212,
-          },
-        },
-        {
-          position: {
-            lat: 51.198429,
-            lng: 6.69529,
-          },
-        },
-        {
-          position: {
-            lat: 51.165218,
-            lng: 7.067116,
-          },
-        },
-        {
-          position: {
-            lat: 51.09256,
-            lng: 6.84074,
-          },
-        },
-      ],
-    };
+import { defineComponent } from 'vue';
+import { GoogleMap, Marker } from 'vue3-google-map'; // https://vue3-google-map.netlify.app
+
+export default defineComponent({
+  components: { GoogleMap, Marker },
+  props: {
+    lat: Number,
+    lon: Number
   },
-};
+  setup(props) {
+    const center = { lat: props.lat, lng: props.lon };
+    return { center };
+  }
+});
 </script>
 
-<style>
-body {
-  margin: 0;
+<template>
+  <GoogleMap api-key="YOUR_GOOGLE_MAPS_API_KEY" class="map" :center="center" :zoom="12">
+    <Marker :options="{ position: center }" />
+  </GoogleMap>
+</template>
+
+<style scoped>
+.map {
+  position: relative;
+  max-width: 100%;
+  height: 300px;
+}
+
+.map::after {
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  background: red;
 }
 </style>
