@@ -39,6 +39,10 @@ export default {
 </script>
 
 <template>
+  <p class="nav">
+    <a> Subscribe</a>
+    <router-link to="/" class="header"> Back </router-link>
+  </p>
   <main class="main-about-section">
     <p>This application was developed by a group of enthusiasts to try out the Vue.js capabilities</p>
     <section class="about-contributors-section">
@@ -57,10 +61,13 @@ export default {
 
 <style scoped>
 * {
-  color: #000;
-  background-color: #fff;
   margin: 0;
   padding: 0;
+}
+p.nav {
+  border: 1px solid black;
+  margin: 0 0 0px 0;
+  padding: 10px 0 10px 10px;
 }
 
 ul,
@@ -72,6 +79,7 @@ li {
   padding: 50px;
   margin: auto;
   max-width: 1280px;
+  border: 1px solid black;
 }
 
 .about-contributors-section {

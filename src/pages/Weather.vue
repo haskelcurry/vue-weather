@@ -81,7 +81,7 @@ export default {
   <span>{{ cities.join(', ') }}</span>
   <section>
     <input type="text" placeholder="Назва села" autofocus v-model="searchText" />
-    <button @click="search">Пошук</button>
+    <n-button @click="search">Пошук</n-button>
     <span class="error">{{ error }}</span>
   </section>
   <section class="results">

@@ -3,17 +3,22 @@ export default {};
 </script>
 
 <template>
-  <p class="nav">
-    <router-link to="/">Погода</router-link>
-    <router-link to="/about">Про нас</router-link>
-    <router-link to="/subscribe">Підписатись</router-link>
-    <router-link to="/settings">Налаштування</router-link>
-  </p>
+  <n-tabs type="line">
+    <n-tab name="weather">
+      <router-link to="/">Погода</router-link>
+    </n-tab>
+    <n-tab name="about">
+      <router-link to="/about">Про нас</router-link>
+    </n-tab>
+    <n-tab name="subscribe">
+      <router-link to="/subscribe">Підписатись</router-link>
+    </n-tab>
+    <n-tab name="setting">
+      <router-link to="/settings">Налаштування</router-link>
+    </n-tab>
+  </n-tabs>
   <router-view></router-view>
 </template>
 
 <style scoped>
-.nav a {
-  margin-right: 12px;
-}
 </style>

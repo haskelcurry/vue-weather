@@ -5,6 +5,7 @@ import About from './pages/About.vue';
 import Subscribe from './pages/Subscribe.vue';
 import Settings from './pages/Settings.vue';
 import App from './App.vue';
+import naive from 'naive-ui';
 
 import './styles/main.css';
 
@@ -22,4 +23,5 @@ const router = createRouter({
 
 const app = createApp(App);
 app.use(router);
+app.use(naive);
 app.mount('#app');
