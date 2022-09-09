@@ -81,7 +81,7 @@ export default {
   <span>{{ cities.join(', ') }}</span>
   <section>
     <input type="text" placeholder="Назва села" autofocus v-model="searchText" />
-    <n-button @click="search">Пошук</n-button>
+    <n-button @click="search" color="#ff1e42" class="btn-search">Пошук</n-button>
     <span class="error">{{ error }}</span>
   </section>
   <section class="results">
@@ -111,7 +111,7 @@ section {
   margin-top: 20px;
 }
 
-button {
+.btn-search {
   cursor: pointer;
   border: none;
   font-size: 14px;
@@ -121,11 +121,10 @@ button {
   margin-left: 15px;
   border-radius: 5px;
   color: white;
-  background: #ff1e42;
   transition: background 0.3s ease-in-out;
 }
 
-button:hover {
+.btn-search:hover {
   background: #a8142c;
 }
 
