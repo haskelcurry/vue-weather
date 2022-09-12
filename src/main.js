@@ -10,10 +10,10 @@ import naive from 'naive-ui';
 import './styles/main.css';
 
 const routes = [
-  { path: '/', component: Weather },
-  { path: '/about', component: About },
-  { path: '/Subscribe', component: Subscribe },
-  { path: '/settings', component: Settings }
+  { path: '/', name: 'weather', component: Weather },
+  { path: '/about', name: 'about', component: About },
+  { path: '/Subscribe', name: 'subscribe', component: Subscribe },
+  { path: '/settings', name: 'settings', component: Settings }
 ];
 
 const router = createRouter({
