@@ -1,5 +1,36 @@
+* { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
 body {
-  background: #4f7bc7;
-  color: white;
   font-family: sans-serif;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-container{
+  flex: 1;
+  margin-top: 5px;
+}
+
+.main-container,
+.page-footer{
+  background: #4f7bc7; 
+  color: white;
+}
+
+.n-tabs .n-tabs-bar {
+  background-color: #4f7bc7;
 }

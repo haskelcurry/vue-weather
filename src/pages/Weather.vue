@@ -1,9 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script>
-import Header from '../components/Header.vue';
-import Footer from '../components/Footer.vue';
 import GoogleMap from '../components/GoogleMap.vue';
-
 export default {
   data() {
     return {
@@ -72,33 +69,33 @@ export default {
     this.search();
   },
   // eslint-disable-next-line vue/no-reserved-component-names
-  components: { Header, Footer, GoogleMap }
+  components: { GoogleMap }
 };
 </script>
 
 <template>
-  <Header title="Погода в: " />
-  <span>{{ cities.join(', ') }}</span>
-  <section>
-    <input type="text" placeholder="Назва села" autofocus v-model="searchText" />
-    <n-button @click="search" color="#ff1e42" class="btn-search">Пошук</n-button>
-    <span class="error">{{ error }}</span>
-  </section>
-  <section class="results">
-    <div v-for="result in results" class="result-container">
-      <div class="result">
-        <a :href="result.locationGoogleMapsUrl" target="_blank">{{ result.coord.lat + ',' + result.coord.lon }}</a>
-        <div class="name">{{ result.name }}, {{ result.sys.country }}</div>
-        <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
-        <img :src="result.icon" />
-        <div class="description">{{ result.weather[0].description }}</div>
+  <main class="main-container">
+    <span>{{ cities.join(', ') }}</span>
+    <section>
+      <input type="text" placeholder="Назва села" autofocus v-model="searchText" />
+      <n-button @click="search" color="#ff1e42" class="btn-search">Пошук</n-button>
+      <span class="error">{{ error }}</span>
+    </section>
+    <section class="results">
+      <div v-for="result in results" class="result-container">
+        <div class="result">
+          <a :href="result.locationGoogleMapsUrl" target="_blank">{{ result.coord.lat + ',' + result.coord.lon }}</a>
+          <div class="name">{{ result.name }}, {{ result.sys.country }}</div>
+          <div class="temp">{{ Math.round(result.main.temp) }} °C</div>
+          <img :src="result.icon" />
+          <div class="description">{{ result.weather[0].description }}</div>
+        </div>
+        <div id="appMap">
+          <GoogleMap :lat="result.coord.lat" :lon="result.coord.lon" />
+        </div>
       </div>
-      <div id="appMap">
-        <GoogleMap :lat="result.coord.lat" :lon="result.coord.lon" />
-      </div>
-    </div>
-  </section>
-  <Footer groupName="першою" />
+    </section>
+  </main>
 </template>
 
 <style scoped>
@@ -153,6 +150,7 @@ input::placeholder {
   /* width: 1000px; */
   max-width: 1000px;
 }
+
 .result-container {
   display: flex;
   justify-content: space-between;
@@ -185,5 +183,9 @@ input::placeholder {
 
 .result .description {
   color: grey;
+}
+
+.n-tabs .n-tabs-bar {
+  background-color: red;
 }
 </style>

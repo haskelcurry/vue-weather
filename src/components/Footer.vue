@@ -17,7 +17,7 @@ export default {
 <style scoped>
 footer {
   font-size: 12px;
-  margin-top: 32px;
+  padding-top: 32px;
 }
 
 footer span {

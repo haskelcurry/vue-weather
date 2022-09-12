@@ -9,7 +9,6 @@ export default {
   methods: {
     getContributors() {
       const url = 'https://api.github.com/repos/mtuzinskiy/vue-weather/contributors';
-
       function getInitials(name) {
         return name
           .split(' ')
@@ -39,35 +38,33 @@ export default {
 </script>
 
 <template>
-  <p class="nav">
-    <a> Subscribe</a>
-    <router-link to="/" class="header"> Back </router-link>
-  </p>
-  <main class="main-about-section">
-    <p>This application was developed by a group of enthusiasts to try out the Vue.js capabilities</p>
-    <section class="about-contributors-section">
-      <ul class="about-contributors-list">
-        <h1>Contributors</h1>
-        <!-- eslint-disable-next-line vue/require-v-for-key -->
-        <li v-for="item in contributorsList" class="about-contributors-item">
-          <img v-if="item.avatar_url !== ''" v-bind:src="item.avatar_url" class="about-contributors-item-avatar" />
-          <span v-else class="about-contributors-item-initials">{{ item.initials }}</span>
-          <span class="about-contributors-item-name">{{ item.login }}</span>
-        </li>
-      </ul>
+  <main class="main-container">
+    <p class="home-back">
+      <router-link to="/">Back</router-link>
+    </p>
+    <section class="main-about-section">
+      <p>This application was developed by a group of enthusiasts to try out the Vue.js capabilities</p>
+      <section class="about-contributors-section">
+        <ul class="about-contributors-list">
+          <h1>Contributors</h1>
+          <!-- eslint-disable-next-line vue/require-v-for-key -->
+          <li v-for="item in contributorsList" class="about-contributors-item">
+            <img v-if="item.avatar_url !== ''" v-bind:src="item.avatar_url" class="about-contributors-item-avatar" />
+            <span v-else class="about-contributors-item-initials">{{ item.initials }}</span>
+            <span class="about-contributors-item-name">{{ item.login }}</span>
+          </li>
+        </ul>
+      </section>
     </section>
   </main>
 </template>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-p.nav {
+.home-back {
   border: 1px solid black;
   margin: 0 0 0px 0;
   padding: 10px 0 10px 10px;
+  color: white;
 }
 
 ul,
@@ -85,6 +82,7 @@ li {
 .about-contributors-section {
   margin-top: 50px;
 }
+
 .about-contributors-item-avatar {
   height: 50px;
   border-radius: 50%;
@@ -105,12 +103,14 @@ li {
   margin-top: 10px;
   text-align: center;
 }
+
 .about-contributors-item-initials {
   border: 1px solid #000;
   border-radius: 50%;
   padding: 10px;
   margin-right: 5px;
 }
+
 .about-contributors-item-name {
   display: inline-block;
 }
