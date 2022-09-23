@@ -9,8 +9,12 @@ export default {
 
 <template>
   <header>
-    <h2>{{ title }}</h2>
+    <h2>The weather in: {{ title }}</h2>
   </header>
 </template>
 
-<style></style>
+<style>
+  h2 {
+    color:red;
+  }
+</style>
