@@ -16,7 +16,7 @@ export default {
         async apiRequest() {
 
             //const apiAnswer is an example of API response to don't disturb the real API for a while
-            const apiAnswer = {
+         /*   const apiAnswer = {
                 "cod": "200",
                 "message": 0,
                 "cnt": 5,
@@ -216,6 +216,7 @@ export default {
                     "sunset": 1663775777
                 }
             };
+            */
             var url;
 
             const ApiKey = `4d8fb5b93d4af21d66a2948710284366`;
